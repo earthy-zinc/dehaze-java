@@ -5,15 +5,15 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://www.youlai.tech:3306/youlai_boot?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true&allowMultiQueries=true
-    username: youlai
-    password: 123456
+    url: jdbc:mysql://rm-bp1035514z9uq43q46o.mysql.rds.aliyuncs.com:3306/youlai_boot?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true&allowMultiQueries=true
+    username: admin_1066365803
+    password: 142536aA
   data:
     redis:
       database: 6
-      host: 47.117.115.107
+      host: 120.46.178.207
       port: 6379
-      password: 123456
+      password: 142536aA
       timeout: 10s
       lettuce:
         pool:
