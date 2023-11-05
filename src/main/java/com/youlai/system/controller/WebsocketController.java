@@ -2,6 +2,9 @@ package com.youlai.system.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.youlai.system.common.result.Result;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author haoxr
  * @since 2.3.0
  */
+@Tag(name = "08.Websocket接口")
 @RestController
 @RequestMapping("/websocket")
 @RequiredArgsConstructor
@@ -29,6 +33,7 @@ public class WebsocketController {
      *
      * @param message 消息内容
      */
+    @Operation(summary = "广播发送消息")
     @PostMapping("/sendToAll")
     // @SendTo("/topic/all")  // 使用SimpMessagingTemplate发送消息给所有订阅了"/topic/all"目标的客户端
     public Result sendToAll(String message) {
@@ -50,6 +55,7 @@ public class WebsocketController {
      *
      * @param userId 用户ID
      */
+    @Operation(summary = "点对点发送消息")
     @PostMapping("/sendToUser/{userId}")
     public Result sendToUser(@PathVariable Long userId, String message) {
         log.info("【点对点请求接收】用户：{};消息：{}", userId, JSONUtil.toJsonStr(message));
