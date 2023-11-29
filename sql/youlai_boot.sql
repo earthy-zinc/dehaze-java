@@ -322,5 +322,118 @@ INSERT INTO `sys_user_role` VALUES (2, 2);
 INSERT INTO `sys_user_role` VALUES (3, 3);
 INSERT INTO `sys_user_role` VALUES (287, 2);
 
+
+DROP TABLE IF EXISTS `operation_log`;
+CREATE TABLE `operation_log` (
+    `operation_id` bigint not null comment '操作id',
+    `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '操作类型',
+    `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '操作名称',
+    `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '操作描述',
+    `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '返回数据',
+    `user_id` int NOT NULL COMMENT '用户id',
+    `nickname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户昵称',
+    `ip_address` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '操作ip',
+    `ip_source` varchar(255) NOT NULL COMMENT '操作地址',
+    `times` int NOT NULL COMMENT '操作耗时 (毫秒)',
+    `create_time` datetime NOT NULL COMMENT '操作时间'
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志表' ROW_FORMAT = DYNAMIC;
+
+DROP TABLE IF EXISTS `visit_log`;
+CREATE TABLE `visit_log` (
+                               `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+                               `user_id` bigint DEFAULT NULL comment '用户id（若已登录）',
+                               `page` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '访问页面',
+                               `ip_address` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '访问ip',
+                               `ip_source` varchar(255) DEFAULT NULL COMMENT '访问地址',
+                               `os` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '操作系统',
+                               `browser` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '浏览器',
+                               `create_time` datetime NOT NULL COMMENT '访问时间',
+                               PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '访问日志表' ROW_FORMAT = DYNAMIC;
+
+
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE `product` (
+                           `id` bigint NOT NULL AUTO_INCREMENT COMMENT '套餐Id',
+                           `name` varchar(255) DEFAULT NULL COMMENT '套餐名称',
+                           `description` varchar(2000) DEFAULT NULL COMMENT '介绍描述',
+                           `dehaze_count` bigint DEFAULT NULL COMMENT '去雾次数',
+                           `evaluate_count` bigint DEFAULT NULL COMMENT '评估次数',
+                           `history_count` varchar(255) DEFAULT NULL COMMENT '历史记录保留次数',
+                           `status` varchar(2000) DEFAULT NULL COMMENT '套餐状态',
+                           `price` decimal(18,4) DEFAULT NULL COMMENT '价格',
+                           `sale_count` bigint DEFAULT NULL COMMENT '销量',
+                           PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT='套餐信息' ROW_FORMAT = DYNAMIC;
+
+
+
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+                         `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+                         `member_id` bigint DEFAULT NULL COMMENT '会员id',
+                         `order_sn` char(32) DEFAULT NULL COMMENT '订单号',
+                         `product_id` bigint DEFAULT NULL COMMENT '套餐id',
+                         `username` varchar(200) DEFAULT NULL COMMENT '用户名',
+                         `total_amount` decimal(18,4) DEFAULT NULL COMMENT '订单总额',
+                         `pay_amount` decimal(18,4) DEFAULT NULL COMMENT '应付总额',
+                         `pay_type` tinyint DEFAULT NULL COMMENT '支付方式【1->支付宝；2->微信；3->银联； 4->货到付款；】',
+                         `status` tinyint DEFAULT NULL COMMENT '订单状态【0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单】',
+                         `bill_type` tinyint DEFAULT NULL COMMENT '发票类型[0->不开发票；1->电子发票；2->纸质发票]',
+                         `note` varchar(500) DEFAULT NULL COMMENT '订单备注',
+                         `confirm_status` tinyint DEFAULT NULL COMMENT '确认收货状态[0->未确认；1->已确认]',
+                         `delete_status` tinyint DEFAULT NULL COMMENT '删除状态【0->未删除；1->已删除】',
+                         `create_time` datetime DEFAULT NULL COMMENT '订单创建时间',
+                         `payment_time` datetime DEFAULT NULL COMMENT '支付时间(套餐开始时间)',
+                         `comment_time` datetime DEFAULT NULL COMMENT '评价时间',
+                         `purchase_duration` datetime DEFAULT NULL COMMENT '购买时长',
+                         PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT='订单表' ROW_FORMAT = DYNAMIC;
+
+DROP TABLE IF EXISTS `member`;
+CREATE TABLE `member` (
+                          `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+                          `username` char(64) DEFAULT NULL COMMENT '用户名',
+                          `nickname` varchar(64) DEFAULT NULL COMMENT '昵称',
+                          `mobile` varchar(20) DEFAULT NULL COMMENT '手机号码',
+                          `email` varchar(64) DEFAULT NULL COMMENT '邮箱',
+                          `header` varchar(500) DEFAULT NULL COMMENT '头像',
+                          `gender` tinyint DEFAULT NULL COMMENT '性别',
+                          `birth` date DEFAULT NULL COMMENT '生日',
+                          `city` varchar(500) DEFAULT NULL COMMENT '所在城市',
+                          `job` varchar(255) DEFAULT NULL COMMENT '职业',
+                          `sign` varchar(255) DEFAULT NULL COMMENT '个性签名',
+                          `status` tinyint DEFAULT NULL COMMENT '启用状态',
+                          `create_time` datetime DEFAULT NULL COMMENT '注册时间',
+                          PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT='会员' ROW_FORMAT = DYNAMIC;
+
+DROP TABLE IF EXISTS `sys_file`;
+CREATE TABLE `sys_file` (
+                               `file_id` int NOT NULL AUTO_INCREMENT COMMENT '文件id',
+                               `file_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '文件url',
+                               `file_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '文件名',
+                               `file_size` int NOT NULL DEFAULT '0' COMMENT '文件大小',
+                               `extend_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '文件类型',
+                               `file_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '文件路径',
+                               `md5` char(32) unique NOT NULL COMMENT '文件的MD5值，用于比对文件是否相同',
+                               `create_time` datetime NOT NULL COMMENT '创建时间',
+                               `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                               PRIMARY KEY (`file_id`) USING BTREE,
+                               UNIQUE INDEX `md5_key`(`md5` ASC) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='博客文件表';
+
+DROP TABLE IF EXISTS `sys_model`;
+CREATE TABLE `sys_model` (
+                         `id` bigint NOT NULL AUTO_INCREMENT COMMENT '模型id',
+                         `parent_id` bigint DEFAULT 0 COMMENT '模型的父id',
+                         `type` int DEFAULT 0 COMMENT '模型类型，0为图像去雾',
+                         `name` varchar(64) DEFAULT NULL COMMENT '模型名称',
+                         `path` varchar(255) DEFAULT NULL COMMENT '模型的存放路径',
+                         `description` varchar(500) DEFAULT NULL COMMENT '针对该模型的详细描述',
+                         `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+                         PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='模型表';
+
 SET FOREIGN_KEY_CHECKS = 1;
 
