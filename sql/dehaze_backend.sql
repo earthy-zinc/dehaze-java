@@ -163,8 +163,8 @@ CREATE TABLE `sys_role`  (
                              `status` tinyint(1) NULL DEFAULT 1 COMMENT '角色状态(1-正常；0-停用)',
                              `data_scope` tinyint NULL DEFAULT NULL COMMENT '数据权限(0-所有数据；1-部门及子部门数据；2-本部门数据；3-本人数据)',
                              `deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '逻辑删除标识(0-未删除；1-已删除)',
-                             `create_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                             `update_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
                              PRIMARY KEY (`id`) USING BTREE,
                              UNIQUE INDEX `name`(`name` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 128 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色表' ROW_FORMAT = DYNAMIC;
@@ -300,7 +300,8 @@ CREATE TABLE `operation_log` (
                                  `ip_address` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '操作ip',
                                  `ip_source` varchar(255) NOT NULL COMMENT '操作地址',
                                  `times` int NOT NULL COMMENT '操作耗时 (毫秒)',
-                                 `create_time` datetime NOT NULL COMMENT '操作时间'
+                                 `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                 `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间'
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志表' ROW_FORMAT = DYNAMIC;
 
 DROP TABLE IF EXISTS `visit_log`;
@@ -312,7 +313,8 @@ CREATE TABLE `visit_log` (
                              `ip_source` varchar(255) DEFAULT NULL COMMENT '访问地址',
                              `os` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '操作系统',
                              `browser` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '浏览器',
-                             `create_time` datetime NOT NULL COMMENT '访问时间',
+                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
                              PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '访问日志表' ROW_FORMAT = DYNAMIC;
 
@@ -328,6 +330,8 @@ CREATE TABLE `product` (
                            `status` varchar(2000) DEFAULT NULL COMMENT '套餐状态',
                            `price` decimal(18,4) DEFAULT NULL COMMENT '价格',
                            `sale_count` bigint DEFAULT NULL COMMENT '销量',
+                           `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                           `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT='套餐信息' ROW_FORMAT = DYNAMIC;
 
@@ -349,6 +353,7 @@ CREATE TABLE `order` (
                          `confirm_status` tinyint DEFAULT NULL COMMENT '确认收货状态[0->未确认；1->已确认]',
                          `delete_status` tinyint DEFAULT NULL COMMENT '删除状态【0->未删除；1->已删除】',
                          `create_time` datetime DEFAULT NULL COMMENT '订单创建时间',
+                         `update_time` datetime NULL DEFAULT NULL COMMENT '订单更新时间',
                          `payment_time` datetime DEFAULT NULL COMMENT '支付时间(套餐开始时间)',
                          `comment_time` datetime DEFAULT NULL COMMENT '评价时间',
                          `purchase_duration` datetime DEFAULT NULL COMMENT '购买时长',
@@ -370,6 +375,7 @@ CREATE TABLE `member` (
                           `sign` varchar(255) DEFAULT NULL COMMENT '个性签名',
                           `status` tinyint DEFAULT NULL COMMENT '启用状态',
                           `create_time` datetime DEFAULT NULL COMMENT '注册时间',
+                          `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
                           PRIMARY KEY (`id`)
 ) ENGINE=InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT='会员' ROW_FORMAT = DYNAMIC;
 
@@ -397,6 +403,7 @@ CREATE TABLE `sys_model` (
                              `path` varchar(255) DEFAULT NULL COMMENT '模型的存放路径',
                              `description` varchar(500) DEFAULT NULL COMMENT '针对该模型的详细描述',
                              `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
                              PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='模型表';
 

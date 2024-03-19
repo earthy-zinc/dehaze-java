@@ -1,5 +1,5 @@
 server:
-  port: 8990
+  port: 8989
 
 spring:
   datasource:
@@ -11,7 +11,7 @@ spring:
   data:
     redis:
       database: 6
-      host: 192.168.31.2
+      host: 47.120.48.158
       port: 6379
       password: 142536aA
       timeout: 10s
