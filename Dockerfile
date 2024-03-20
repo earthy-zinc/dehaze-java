@@ -12,11 +12,9 @@ VOLUME /tmp
 
 ADD target/*.jar app.jar
 
-CMD java \
-    -Djava.security.egd=file:/dev/./urandom \
-    -jar /app.jar
+CMD java -jar /app.jar --spring.profiles.active=prod
 
-EXPOSE 8989
+EXPOSE 80
 # 时区修改
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo 'Asia/Shanghai' >/etc/timezone; \
