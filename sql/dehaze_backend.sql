@@ -401,7 +401,7 @@ CREATE TABLE `sys_model` (
                              `type` int DEFAULT 0 COMMENT '模型类型，0为图像去雾',
                              `name` varchar(64) DEFAULT NULL COMMENT '模型名称',
                              `path` varchar(255) DEFAULT NULL COMMENT '模型的存放路径',
-                             `description` varchar(500) DEFAULT NULL COMMENT '针对该模型的详细描述',
+                             `description` varchar(2048) DEFAULT NULL COMMENT '针对该模型的详细描述',
                              `create_time` datetime DEFAULT NULL COMMENT '创建时间',
                              `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
                              PRIMARY KEY (`id`) USING BTREE
