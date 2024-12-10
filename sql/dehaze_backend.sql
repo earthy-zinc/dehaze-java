@@ -263,11 +263,11 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'root', '有来技术', 0, '$2a$10$xVWsNOhHrCxh5UbpCE7/HuJ.PAOKcYAqRxD2CO2nVnJS.IAXkr5aq', NULL, 'https://oss.youlai.tech/youlai-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif', '17621590365', 1, 'youlaitech@163.com', 0, NULL, NULL);
-INSERT INTO `sys_user` VALUES (2, 'admin', '系统管理员', 1, '$2a$10$xVWsNOhHrCxh5UbpCE7/HuJ.PAOKcYAqRxD2CO2nVnJS.IAXkr5aq', 1, 'https://oss.youlai.tech/youlai-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif', '18537958917', 1, '1066365803@qq.com', 0, '2019-10-10 13:41:22', '2023-11-08 11:44:59');
-INSERT INTO `sys_user` VALUES (3, 'test', '测试用户', 1, '$2a$10$xVWsNOhHrCxh5UbpCE7/HuJ.PAOKcYAqRxD2CO2nVnJS.IAXkr5aq', 3, 'https://oss.youlai.tech/youlai-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif', '', 1, '', 0, '2021-06-05 01:31:29', '2023-11-08 11:45:13');
+INSERT INTO `sys_user` VALUES (1, 'root', '有来技术', 0, '$2a$10$xVWsNOhHrCxh5UbpCE7/HuJ.PAOKcYAqRxD2CO2nVnJS.IAXkr5aq', NULL, '', '17621590365', 1, 'youlaitech@163.com', 0, NULL, NULL);
+INSERT INTO `sys_user` VALUES (2, 'admin', '系统管理员', 1, '$2a$10$xVWsNOhHrCxh5UbpCE7/HuJ.PAOKcYAqRxD2CO2nVnJS.IAXkr5aq', 1, '', '18537958917', 1, '1066365803@qq.com', 0, '2019-10-10 13:41:22', '2023-11-08 11:44:59');
+INSERT INTO `sys_user` VALUES (3, 'test', '测试用户', 1, '$2a$10$xVWsNOhHrCxh5UbpCE7/HuJ.PAOKcYAqRxD2CO2nVnJS.IAXkr5aq', 3, '', '', 1, '', 0, '2021-06-05 01:31:29', '2023-11-08 11:45:13');
 INSERT INTO `sys_user` VALUES (287, '123', '123', 1, '$2a$10$mVoBVqm1837huf7kcN0wS.GVYKEFv0arb7GvzfFXoTyqDlcRzT.6i', 1, '', NULL, 1, NULL, 1, '2023-05-21 14:11:19', '2023-05-21 14:11:25');
-INSERT INTO `sys_user` VALUES (288, 'dehaze', '去雾小能手', 1, '$2a$10$tf9OTmHCPLVA6JqKczd0UOJqxBooOEKpXulM1tmStPqrzELEAWcdi', 171, 'https://oss.youlai.tech/youlai-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif', NULL, 1, NULL, 0, '2023-11-08 11:45:56', '2023-11-08 11:45:56');
+INSERT INTO `sys_user` VALUES (288, 'dehaze', '去雾小能手', 1, '$2a$10$tf9OTmHCPLVA6JqKczd0UOJqxBooOEKpXulM1tmStPqrzELEAWcdi', 171, '', NULL, 1, NULL, 0, '2023-11-08 11:45:56', '2023-11-08 11:45:56');
 
 -- ----------------------------
 -- Table structure for sys_user_role
