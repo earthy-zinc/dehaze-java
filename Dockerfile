@@ -1,11 +1,20 @@
-# SpringBoot单体应用部署Dockerfile
-FROM openjdk:17
+# 基础镜像
+FROM openjdk:17-jdk-alpine
 
-# /data 目录就会在运行时自动挂载为匿名卷，任何向 /data 中写入的信息都不会记录进容器存储层
-VOLUME /data
+# 设置国内镜像源(中国科技大学镜像源)，修改容器时区(alpine镜像需安装tzdata来设置时区)，安装字体库(验证码)
+RUN echo -e https://mirrors.ustc.edu.cn/alpine/v3.7/main/ \
+    > /etc/apk/repositories  \
+    && apk --no-cache add tzdata \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo "Asia/Shanghai" > /etc/timezone \
+    && apk --no-cache add ttf-dejavu fontconfig
 
-ADD target/*.jar app.jar
+WORKDIR /app
 
-ENTRYPOINT ["java","-jar", "/app.jar"]
+VOLUME /app/log
+
+COPY target/dehazing-java.jar app.jar
+
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar", "--spring.profiles.active=prod"]
 
 EXPOSE 80
